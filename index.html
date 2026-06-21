@@ -3,841 +3,910 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unidades de Concentración – Repaso Examen</title>
+<title>Química Orgánica · Guía de examen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
-
-  :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --card: #1c2330;
-    --border: #30363d;
-    --accent: #58a6ff;
-    --accent2: #3fb950;
-    --accent3: #d29922;
-    --accent4: #f78166;
-    --accent5: #bc8cff;
-    --text: #e6edf3;
-    --muted: #8b949e;
+  :root{
+    --bg: #1B1F1C;
+    --bg-soft: #20251F;
+    --panel: #242A23;
+    --ink: #EDE8DD;
+    --ink-dim: #B9B6A9;
+    --line: #3A4138;
+    --green: #8FBE6B;
+    --green-dim: #5C7A47;
+    --amber: #D9A653;
+    --blue: #6FA0C4;
+    --red: #C77B6B;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
     background: var(--bg);
-    color: var(--text);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
+    color: var(--ink);
+    font-family: var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ---- HEADER ---- */
-  header {
-    background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 50%, #0d1117 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 24px 36px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(88,166,255,0.12) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    font-weight: 900;
-    background: linear-gradient(90deg, #58a6ff, #bc8cff, #3fb950);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  header p {
-    color: var(--muted);
-    font-size: 1rem;
-    margin-top: 8px;
-    font-weight: 400;
-  }
-  .badge {
-    display: inline-block;
-    background: rgba(88,166,255,0.15);
-    border: 1px solid rgba(88,166,255,0.35);
-    color: var(--accent);
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 99px;
-    margin-top: 14px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  /* subtle grid texture, like graph paper for a lab notebook */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 36px 36px;
+    opacity:0.06;
+    pointer-events:none;
+    z-index:0;
   }
 
-  /* ---- NAV TABS ---- */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 20px 16px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  nav button {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 8px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.88rem;
-    font-weight: 600;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
-  }
-  nav button:hover { border-color: var(--accent); color: var(--accent); }
-  nav button.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #0d1117;
-  }
+  a{ color: var(--green); }
 
-  /* ---- SECTIONS ---- */
-  .section { display: none; max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
-  .section.active { display: block; }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 28px; position:relative; z-index:1; }
 
-  /* ---- CARDS ---- */
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 28px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
+  /* ---------- NAV ---------- */
+  nav{
+    position: sticky; top:0; z-index:50;
+    background: rgba(27,31,28,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
   }
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    border-radius: 12px 12px 0 0;
+  .nav-inner{
+    max-width: 980px; margin:0 auto; padding: 14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 16px;
   }
-  .card.blue::before   { background: var(--accent); }
-  .card.green::before  { background: var(--accent2); }
-  .card.yellow::before { background: var(--accent3); }
-  .card.red::before    { background: var(--accent4); }
-  .card.purple::before { background: var(--accent5); }
+  .brand{
+    font-family: var(--mono); font-size:13px; letter-spacing:0.06em;
+    color: var(--ink-dim); text-transform:uppercase;
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ color: var(--green); }
+  .navlinks{ display:flex; gap:22px; font-size:13.5px; }
+  .navlinks a{
+    color: var(--ink-dim); text-decoration:none;
+    border-bottom: 1px solid transparent;
+    padding-bottom:2px;
+    transition: color .15s, border-color .15s;
+  }
+  .navlinks a:hover{ color: var(--ink); border-color: var(--green); }
+  @media (max-width: 640px){ .navlinks{ display:none; } }
 
-  .card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 96px 0 64px;
+    position:relative;
+    overflow:hidden;
   }
-  .card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--accent);
-    margin: 18px 0 8px;
-  }
-  .card p { color: #c9d1d9; font-size: 0.95rem; margin-bottom: 10px; }
-
-  /* ---- FORMULA BOX ---- */
-  .formula {
-    background: rgba(88,166,255,0.08);
-    border: 1px solid rgba(88,166,255,0.25);
-    border-radius: 8px;
-    padding: 14px 18px;
-    margin: 12px 0;
-    font-size: 1.05rem;
-    text-align: center;
-    color: #79c0ff;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-  }
-
-  /* ---- TABLE ---- */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-    margin: 14px 0;
-  }
-  th {
-    background: rgba(88,166,255,0.15);
-    color: var(--accent);
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 600;
-    border-bottom: 1px solid var(--border);
-  }
-  td {
-    padding: 9px 14px;
-    border-bottom: 1px solid rgba(48,54,61,0.6);
-    color: #c9d1d9;
-    vertical-align: top;
-  }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,0.03); }
-
-  /* ---- HIGHLIGHT ---- */
-  .highlight {
-    background: rgba(63,185,80,0.1);
-    border-left: 3px solid var(--accent2);
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-    margin: 12px 0;
-    color: #7ee787;
-    font-size: 0.92rem;
-  }
-  .warning {
-    background: rgba(210,153,34,0.1);
-    border-left: 3px solid var(--accent3);
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-    margin: 12px 0;
-    color: #e3b341;
-    font-size: 0.92rem;
-  }
-
-  /* ---- PRACTICE ---- */
-  .question-block {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px 26px;
+  .eyebrow{
+    font-family: var(--mono); font-size:12.5px; letter-spacing:0.12em;
+    color: var(--amber); text-transform:uppercase;
     margin-bottom: 18px;
-    transition: border-color 0.3s;
+    display:flex; align-items:center; gap:10px;
   }
-  .question-block.correct { border-color: var(--accent2); }
-  .question-block.wrong   { border-color: var(--accent4); }
+  .eyebrow::before{
+    content:""; width:18px; height:1px; background: var(--amber);
+  }
+  h1{
+    font-family: var(--display);
+    font-weight:600;
+    font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+    line-height: 1.04;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+  }
+  h1 em{
+    font-style: italic;
+    color: var(--green);
+    font-weight:500;
+  }
+  .hero-sub{
+    max-width: 560px;
+    color: var(--ink-dim);
+    font-size: 17px;
+  }
+  .hero-meta{
+    margin-top:36px;
+    display:flex; gap: 28px; flex-wrap:wrap;
+  }
+  .meta-item{ display:flex; flex-direction:column; gap:4px; }
+  .meta-item .num{ font-family: var(--display); font-size:1.9rem; color: var(--ink); font-style:italic; }
+  .meta-item .label{ font-size:12px; color: var(--ink-dim); text-transform:uppercase; letter-spacing:0.06em; }
 
-  .question-num {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
+  /* floating molecule motif behind hero */
+  .hero-orbit{
+    position:absolute; right:-60px; top:30px; width:380px; height:380px;
+    opacity:0.5; pointer-events:none;
   }
-  .question-text {
-    font-size: 1rem;
-    color: var(--text);
-    font-weight: 400;
-    margin-bottom: 16px;
-    line-height: 1.6;
+  @media (max-width: 800px){ .hero-orbit{ display:none; } }
+
+  /* ---------- SECTION SCAFFOLDING ---------- */
+  section{ padding: 70px 0; border-top: 1px solid var(--line); scroll-margin-top: 80px; }
+  .section-head{ margin-bottom: 40px; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; }
+  .section-tag{
+    font-family: var(--mono); font-size:12px; color: var(--green);
+    letter-spacing:0.08em; text-transform:uppercase;
+    border:1px solid var(--green-dim); border-radius:100px;
+    padding: 4px 12px;
+    white-space:nowrap;
   }
-  .options { display: flex; flex-direction: column; gap: 8px; }
-  .option {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
+  h2{
+    font-family: var(--display); font-weight:600;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin:0; letter-spacing:-0.01em;
+  }
+  .section-intro{ color: var(--ink-dim); max-width:640px; margin: 14px 0 0; font-size:15.5px; }
+
+  /* ---------- TEMAS (table-like cards) ---------- */
+  .temas-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px){ .temas-grid{ grid-template-columns: 1fr; } }
+  .tema-card{
+    background: var(--panel);
+    border:1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 26px 22px;
+  }
+  .tema-card .tnum{
+    font-family: var(--mono); color: var(--amber); font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase;
+  }
+  .tema-card h3{
+    font-family: var(--display); font-style:italic; font-weight:500;
+    font-size:1.4rem; margin: 8px 0 14px; color: var(--ink);
+  }
+  .tema-card ul{ margin:0; padding-left:18px; color: var(--ink-dim); font-size:14.5px; }
+  .tema-card li{ margin-bottom: 7px; }
+  .tema-card li::marker{ color: var(--green); }
+
+  /* ---------- HIBRIDACION (signature) ---------- */
+  .hib-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 800px){ .hib-grid{ grid-template-columns: 1fr; } }
+  .hib-card{
+    background: var(--panel);
+    border:1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .hib-card .hib-name{
+    font-family: var(--mono); font-size: 22px; font-weight:700;
+  }
+  .hib-card.sp3 .hib-name{ color: var(--green); }
+  .hib-card.sp2 .hib-name{ color: var(--amber); }
+  .hib-card.sp .hib-name{ color: var(--blue); }
+  .hib-svg-wrap{
+    background: var(--bg-soft);
     border-radius: 8px;
-    padding: 11px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.93rem;
-    color: #c9d1d9;
-    text-align: left;
-    font-family: inherit;
+    display:flex; align-items:center; justify-content:center;
+    padding: 14px 0;
   }
-  .option:hover:not(:disabled) {
-    border-color: var(--accent);
-    background: rgba(88,166,255,0.08);
-    color: var(--text);
+  .hib-angle{ font-family: var(--mono); font-size:13px; color: var(--ink-dim); }
+  .hib-angle b{ color: var(--ink); }
+  .hib-desc{ font-size:13.5px; color: var(--ink-dim); }
+  .hib-example{
+    font-family: var(--mono); font-size:12.5px;
+    color: var(--bg); background: var(--ink-dim);
+    border-radius: 4px; padding: 2px 8px; align-self:flex-start;
   }
-  .option.selected-correct {
-    background: rgba(63,185,80,0.15);
-    border-color: var(--accent2);
-    color: #7ee787;
-  }
-  .option.selected-wrong {
-    background: rgba(247,129,102,0.15);
-    border-color: var(--accent4);
-    color: #ffa198;
-  }
-  .option.show-correct {
-    background: rgba(63,185,80,0.08);
-    border-color: rgba(63,185,80,0.4);
-    color: #7ee787;
-  }
-  .option:disabled { cursor: default; }
 
-  .feedback {
-    margin-top: 12px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    display: none;
+  /* ---------- ENLACES (sigma/pi) ---------- */
+  .enlace-row{
+    display:grid; grid-template-columns: 90px 1fr; gap:24px;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
+    align-items:start;
   }
-  .feedback.show { display: block; }
-  .feedback.ok  { background: rgba(63,185,80,0.12); color: #7ee787; }
-  .feedback.no  { background: rgba(247,129,102,0.12); color: #ffa198; }
-
-  /* ---- SCORE ---- */
-  #score-panel {
-    background: var(--card);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 28px;
-    text-align: center;
-    display: none;
-    margin-top: 20px;
+  .enlace-row:last-child{ border-bottom:none; }
+  .enlace-sym{
+    font-family: var(--display); font-style:italic; font-size:2.6rem;
+    line-height:1;
   }
-  #score-panel.show { display: block; }
-  #score-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--accent);
+  .enlace-row.sigma .enlace-sym{ color: var(--green); }
+  .enlace-row.pi .enlace-sym{ color: var(--amber); }
+  .enlace-title{ font-weight:600; margin-bottom:6px; }
+  .enlace-desc{ color: var(--ink-dim); font-size:14.5px; max-width: 580px; }
+  .enlace-tag{
+    display:inline-block; margin-top:10px;
+    font-family: var(--mono); font-size:12px; color: var(--ink-dim);
+    border:1px solid var(--line); border-radius:6px; padding:3px 9px;
   }
-  #score-msg { color: var(--muted); margin-top: 8px; }
 
-  .btn-primary {
-    background: var(--accent);
-    color: #0d1117;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: opacity 0.2s;
+  /* ---------- conteo interactivo ---------- */
+  .count-box{
+    background: var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding: 28px; margin-top: 28px;
   }
-  .btn-primary:hover { opacity: 0.85; }
-
-  .btn-reset {
-    background: transparent;
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 0.9rem;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: all 0.2s;
+  .count-box h4{ margin:0 0 6px; font-family: var(--display); font-style:italic; font-size:1.2rem; }
+  .count-box p{ color: var(--ink-dim); font-size:14px; margin:0 0 18px; }
+  .mol-formula{
+    font-family: var(--mono); font-size:15px; background: var(--bg-soft);
+    border-radius:8px; padding:16px; overflow-x:auto; white-space:nowrap;
+    color: var(--ink);
   }
-  .btn-reset:hover { border-color: var(--accent4); color: var(--accent4); }
+  .mol-formula .db{ color: var(--amber); }
+  .mol-formula .tb{ color: var(--red); }
+  .count-answers{ display:flex; gap:28px; margin-top:16px; flex-wrap:wrap; }
+  .count-answers .ans{ display:flex; align-items:baseline; gap:8px; }
+  .count-answers .ans .v{ font-family:var(--mono); font-size:1.6rem; font-weight:700; }
+  .count-answers .ans.s .v{ color: var(--green); }
+  .count-answers .ans.p .v{ color: var(--amber); }
+  .count-answers .ans .l{ font-size:12.5px; color: var(--ink-dim); text-transform:uppercase; letter-spacing:0.05em; }
 
-  ul.notes { padding-left: 20px; }
-  ul.notes li { margin-bottom: 6px; color: #c9d1d9; font-size: 0.93rem; }
-
-  .tag {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 99px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-left: 8px;
-    vertical-align: middle;
+  /* ---------- HIDROCARBUROS table ---------- */
+  .hc-table{ width:100%; border-collapse: collapse; font-size:14.5px; }
+  .hc-table th{
+    text-align:left; font-family: var(--mono); font-size:12px;
+    text-transform:uppercase; letter-spacing:0.06em; color: var(--ink-dim);
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
   }
-  .tag-b { background: rgba(88,166,255,0.2); color: var(--accent); }
-  .tag-g { background: rgba(63,185,80,0.2); color: var(--accent2); }
-  .tag-y { background: rgba(210,153,34,0.2); color: var(--accent3); }
-  .tag-r { background: rgba(247,129,102,0.2); color: var(--accent4); }
-  .tag-p { background: rgba(188,140,255,0.2); color: var(--accent5); }
+  .hc-table td{
+    padding: 16px 14px; border-bottom: 1px solid var(--line);
+    color: var(--ink-dim); vertical-align:top;
+  }
+  .hc-table td:first-child{ color: var(--ink); font-weight:600; white-space:nowrap; }
+  .hc-table tr:last-child td{ border-bottom:none; }
+  .hc-pill{
+    font-family: var(--mono); font-size:12px; padding:2px 9px; border-radius:5px;
+    display:inline-block;
+  }
+  .hc-pill.sat{ background: rgba(143,190,107,0.15); color: var(--green); }
+  .hc-pill.uns{ background: rgba(217,166,83,0.15); color: var(--amber); }
+  .table-scroll{ overflow-x:auto; }
 
-  /* scroll */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  /* ---------- geometria / isomeria ---------- */
+  .geo-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:18px; }
+  @media (max-width: 800px){ .geo-grid{ grid-template-columns:1fr; } }
+  .geo-card{
+    background: var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:20px; text-align:center;
+  }
+  .geo-card .geo-shape{ margin: 6px 0 14px; }
+  .geo-card .geo-name{ font-family: var(--display); font-style:italic; font-size:1.15rem; margin-bottom:6px; }
+  .geo-card .geo-desc{ font-size:13px; color: var(--ink-dim); }
+
+  .iso-pair{
+    display:grid; grid-template-columns: 1fr 1fr; gap:18px; margin-top:18px;
+  }
+  @media (max-width: 700px){ .iso-pair{ grid-template-columns:1fr; } }
+  .iso-card{
+    background: var(--bg-soft); border:1px solid var(--line); border-radius:10px;
+    padding:18px; text-align:center;
+  }
+  .iso-card .iso-label{
+    font-family: var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.06em;
+    color: var(--blue); margin-bottom:10px; display:block;
+  }
+
+  /* ---------- grupos funcionales ---------- */
+  .func-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+  @media (max-width: 900px){ .func-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px){ .func-grid{ grid-template-columns: 1fr; } }
+  .func-card{
+    background: var(--panel); border:1px solid var(--line); border-radius:9px;
+    padding:16px;
+  }
+  .func-card .func-name{ font-weight:600; font-size:14.5px; margin-bottom:4px; }
+  .func-card .func-group{
+    font-family: var(--mono); font-size:13px; color: var(--amber);
+    margin-bottom:6px; display:block;
+  }
+  .func-card .func-ex{ font-family: var(--mono); font-size:12px; color: var(--ink-dim); }
+
+  /* ---------- preguntas tipo / quiz preview ---------- */
+  .quiz-card{
+    background: var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding: 24px; margin-bottom:16px;
+  }
+  .quiz-card .qn{ font-family: var(--mono); color: var(--amber); font-size:13px; margin-bottom:8px; display:block; }
+  .quiz-card .qtext{ font-size:15px; margin-bottom:16px; color: var(--ink); }
+  .opt-list{ display:flex; flex-direction:column; gap:8px; }
+  .opt{
+    display:flex; align-items:center; gap:10px;
+    padding: 9px 12px; border-radius:7px; border:1px solid var(--line);
+    font-size:14px; color: var(--ink-dim);
+    cursor:pointer; transition: border-color .15s, color .15s, background .15s;
+    background: var(--bg-soft);
+  }
+  .opt:hover{ border-color: var(--green-dim); color: var(--ink); }
+  .opt .bullet{
+    width:16px; height:16px; border-radius:50%; border:1.5px solid var(--ink-dim);
+    flex-shrink:0; transition: all .15s; position:relative;
+  }
+  .opt.correct .bullet{ border-color: var(--green); background: var(--green); }
+  .opt.correct .bullet::after{
+    content:""; position:absolute; inset:3px; border-radius:50%; background: var(--bg);
+  }
+  .opt.wrong .bullet{ border-color: var(--red); }
+  .opt.correct{ border-color: var(--green); color: var(--ink); }
+  .opt.wrong{ border-color: var(--red); color: var(--ink); }
+  .reveal-hint{ font-size:12px; color: var(--ink-dim); margin-top:10px; font-family: var(--mono); opacity:0.7; }
+
+  /* ---------- respuesta restringida ---------- */
+  .rr-card{
+    background: var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding: 24px 26px; margin-bottom:16px;
+  }
+  .rr-card .rr-num{
+    font-family: var(--display); font-style:italic; font-size:1.6rem; color: var(--blue);
+    margin-bottom:8px; display:block;
+  }
+  .rr-card .rr-q{ font-weight:600; margin-bottom:10px; font-size:15px; }
+  .rr-card .rr-a{ color: var(--ink-dim); font-size:14.5px; }
+  .rr-card .rr-a strong{ color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer{
+    padding: 50px 0 70px; text-align:center;
+    color: var(--ink-dim); font-size:13px;
+  }
+  footer .dot-row{ color: var(--green); margin-bottom:10px; letter-spacing:4px; }
+
+  .fade-up{
+    opacity:0; transform: translateY(16px);
+    animation: fadeUp .6s ease forwards;
+  }
+  @keyframes fadeUp{ to{ opacity:1; transform:none; } }
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-up{ animation:none; opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="badge">Química 12° · II Prueba I Semestre</div>
-  <h1>Unidades de Concentración</h1>
-  <p>Resumen completo + práctica interactiva · Solo lo que entra en el examen</p>
-</header>
-
 <nav>
-  <button class="active" onclick="showTab('resumen')">📚 Resumen</button>
-  <button onclick="showTab('formulas')">🔢 Fórmulas</button>
-  <button onclick="showTab('aguas')">💧 Aguas Residuales</button>
-  <button onclick="showTab('practica')">✏️ Práctica</button>
+  <div class="nav-inner">
+    <div class="brand"><span class="dot">●</span> QUIM 12° · II SEM</div>
+    <div class="navlinks">
+      <a href="#temas">Temas</a>
+      <a href="#carbono">El carbono</a>
+      <a href="#hibridacion">Hibridación</a>
+      <a href="#enlaces">Enlaces</a>
+      <a href="#isomeria">Isomería</a>
+      <a href="#hidrocarburos">Hidrocarburos</a>
+      <a href="#funcionales">Funcionales</a>
+      <a href="#practica">Práctica</a>
+    </div>
+  </div>
 </nav>
 
-<!-- ===================== RESUMEN ===================== -->
-<section id="resumen" class="section active">
+<header class="wrap hero">
+  <svg class="hero-orbit" viewBox="0 0 380 380" fill="none">
+    <circle cx="190" cy="190" r="10" fill="#8FBE6B"/>
+    <circle cx="190" cy="190" r="70" stroke="#3A4138" stroke-width="1"/>
+    <circle cx="190" cy="190" r="130" stroke="#3A4138" stroke-width="1"/>
+    <circle cx="260" cy="190" r="7" fill="#D9A653"/>
+    <circle cx="120" cy="190" r="7" fill="#D9A653"/>
+    <circle cx="190" cy="120" r="7" fill="#6FA0C4"/>
+    <circle cx="190" cy="260" r="7" fill="#6FA0C4"/>
+    <circle cx="103" cy="103" r="5" fill="#C77B6B"/>
+    <circle cx="277" cy="277" r="5" fill="#C77B6B"/>
+  </svg>
+  <div class="eyebrow fade-up">Guía de repaso · Química I</div>
+  <h1 class="fade-up" style="animation-delay:.05s">El carbono y sus <em>cuatro enlaces</em></h1>
+  <p class="hero-sub fade-up" style="animation-delay:.1s">
+    Repaso de los temas del examen del II semestre: química orgánica, hibridación del carbono,
+    enlaces sigma y pi, e hidrocarburos. Organizado igual que el examen, para estudiar en orden.
+  </p>
+  <div class="hero-meta fade-up" style="animation-delay:.15s">
+    <div class="meta-item"><span class="num">2</span><span class="label">Temas grandes</span></div>
+    <div class="meta-item"><span class="num">3</span><span class="label">Hibridaciones</span></div>
+    <div class="meta-item"><span class="num">9</span><span class="label">Grupos funcionales</span></div>
+    <div class="meta-item"><span class="num">44</span><span class="label">Puntos totales</span></div>
+  </div>
+</header>
 
-  <div class="card blue">
-    <h2>📌 ¿Qué es la Concentración?</h2>
-    <p>Es la relación entre la cantidad de <strong>soluto</strong> (sustancia disuelta) y la cantidad de <strong>disolvente</strong> o de <strong>disolución</strong>. Es una propiedad <strong>intensiva</strong>: no depende del volumen total de la solución.</p>
-    <div class="highlight">Concentración = cantidad de soluto / cantidad de disolvente (o disolución)</div>
-    <table>
-      <tr><th>Tipo</th><th>Unidades incluidas</th></tr>
-      <tr><td>Físicas</td><td>% m/m, % m/v, % v/v, ppm</td></tr>
-      <tr><td>Químicas</td><td>Molaridad (Cn), Molalidad, Fracción molar</td></tr>
+<section id="temas" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">01 · Mapa del examen</span>
+    <h2>Los dos temas oficiales</h2>
+  </div>
+  <p class="section-intro">Según la guía de indicadores entregada, todo el examen cae dentro de estas dos categorías.</p>
+
+  <div class="temas-grid">
+    <div class="tema-card">
+      <span class="tnum">Tema A</span>
+      <h3>Química orgánica</h3>
+      <ul>
+        <li>Concepto de química orgánica</li>
+        <li>Propiedades físicas y químicas del átomo de carbono</li>
+        <li>Importancia de los compuestos orgánicos en los seres vivos</li>
+        <li>Enlaces sigma (σ) y pi (π); simples, dobles y triples</li>
+        <li>Hibridaciones SP3, SP2 y SP</li>
+      </ul>
+    </div>
+    <div class="tema-card">
+      <span class="tnum">Tema B</span>
+      <h3>Hidrocarburos</h3>
+      <ul>
+        <li>Hidrocarburos alifáticos saturados (alcanos)</li>
+        <li>Hidrocarburos alifáticos insaturados (alquenos, alquinos)</li>
+        <li>Hidrocarburos aromáticos</li>
+        <li>Influencia de la química orgánica en la vida diaria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="carbono" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">01.1 · El protagonista</span>
+    <h2>El átomo de carbono</h2>
+  </div>
+  <p class="section-intro">
+    Grupo IV A, periodo 2. Electronegatividad intermedia (2,5, Pauling). Esa posición central
+    le da propiedades únicas que sostienen toda la química orgánica.
+  </p>
+
+  <div class="hib-grid">
+    <div class="hib-card sp3">
+      <div class="hib-name" style="font-size:16px;">Tetravalencia</div>
+      <div class="hib-desc">Tiene 4 electrones de valencia: siempre forma 4 enlaces covalentes. Es la base de toda su química.</div>
+    </div>
+    <div class="hib-card sp2">
+      <div class="hib-name" style="font-size:16px;">Anfoterismo</div>
+      <div class="hib-desc">Puede combinarse con átomos más electronegativos (O, N, halógenos) o menos electronegativos (H, metales) que él.</div>
+    </div>
+    <div class="hib-card sp">
+      <div class="hib-name" style="font-size:16px;">Homocombinación</div>
+      <div class="hib-desc">Capacidad de unirse consigo mismo formando cadenas lineales, ramificadas o cíclicas, casi sin límite de longitud.</div>
+    </div>
+  </div>
+
+  <div class="count-box" style="margin-top:18px;">
+    <h4>Alotropía: dos caras del mismo elemento</h4>
+    <p>Misma composición (solo carbono), distinta estructura — y por tanto, propiedades opuestas.</p>
+    <div class="table-scroll">
+      <table class="hc-table">
+        <thead>
+          <tr><th>Propiedad</th><th>Diamante</th><th>Grafito</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hibridación</td><td>SP3 (tetraédrica)</td><td>SP2 (capas hexagonales)</td></tr>
+          <tr><td>Dureza</td><td>Duro</td><td>Blando</td></tr>
+          <tr><td>Conductividad eléctrica</td><td>No conduce</td><td>Sí conduce</td></tr>
+          <tr><td>Brillo</td><td>Transparente</td><td>Metálico, negro</td></tr>
+          <tr><td>Densidad</td><td>3,51 g/cm³</td><td>2,22 g/cm³</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px;">Para convertir grafito en diamante se necesitan presiones superiores a 10 millones de kPa y unos 2000 °C.</p>
+  </div>
+</section>
+
+<section id="hibridacion" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">02 · El concepto más preguntado</span>
+    <h2>Hibridación del carbono</h2>
+  </div>
+  <p class="section-intro">
+    Explica la geometría de las moléculas, sus ángulos y la covalencia del carbono.
+    Aparece en las preguntas 4, 6, 10 y 11 del examen.
+  </p>
+
+  <div class="hib-grid">
+
+    <div class="hib-card sp3">
+      <div class="hib-name">SP3</div>
+      <div class="hib-svg-wrap">
+        <svg width="150" height="130" viewBox="0 0 150 130">
+          <line x1="75" y1="60" x2="75" y2="10" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="75" y1="60" x2="20" y2="95" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="75" y1="60" x2="130" y2="95" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="75" y1="60" x2="75" y2="120" stroke="#8FBE6B" stroke-width="2" stroke-dasharray="4 3"/>
+          <circle cx="75" cy="60" r="7" fill="#8FBE6B"/>
+          <circle cx="75" cy="10" r="4" fill="#EDE8DD"/>
+          <circle cx="20" cy="95" r="4" fill="#EDE8DD"/>
+          <circle cx="130" cy="95" r="4" fill="#EDE8DD"/>
+          <circle cx="75" cy="120" r="4" fill="#EDE8DD"/>
+        </svg>
+      </div>
+      <div class="hib-angle">Ángulo: <b>109,5°</b></div>
+      <div class="hib-desc">1 orbital s + 3 orbitales p → 4 orbitales tetraédricos. Solo enlaces simples (sigma).</div>
+      <div class="hib-example">Ej: diamante, alcanos</div>
+    </div>
+
+    <div class="hib-card sp2">
+      <div class="hib-name">SP2</div>
+      <div class="hib-svg-wrap">
+        <svg width="150" height="130" viewBox="0 0 150 130">
+          <line x1="75" y1="65" x2="75" y2="15" stroke="#D9A653" stroke-width="2"/>
+          <line x1="75" y1="65" x2="25" y2="95" stroke="#D9A653" stroke-width="2"/>
+          <line x1="75" y1="65" x2="125" y2="95" stroke="#D9A653" stroke-width="2"/>
+          <circle cx="75" cy="65" r="7" fill="#D9A653"/>
+          <circle cx="75" cy="15" r="4" fill="#EDE8DD"/>
+          <circle cx="25" cy="95" r="4" fill="#EDE8DD"/>
+          <circle cx="125" cy="95" r="4" fill="#EDE8DD"/>
+          <path d="M 75 30 A 38 38 0 0 1 35 90" stroke="#3A4138" stroke-width="1" fill="none"/>
+          <text x="40" y="55" font-size="11" fill="#B9B6A9" font-family="JetBrains Mono">120°</text>
+        </svg>
+      </div>
+      <div class="hib-angle">Ángulo: <b>120°</b></div>
+      <div class="hib-desc">1 orbital s + 2 orbitales p → 3 orbitales planos. Forma 1 enlace doble (1σ + 1π).</div>
+      <div class="hib-example">Ej: grafito, alquenos</div>
+    </div>
+
+    <div class="hib-card sp">
+      <div class="hib-name">SP</div>
+      <div class="hib-svg-wrap">
+        <svg width="150" height="130" viewBox="0 0 150 130">
+          <line x1="20" y1="65" x2="130" y2="65" stroke="#6FA0C4" stroke-width="2"/>
+          <circle cx="75" cy="65" r="7" fill="#6FA0C4"/>
+          <circle cx="20" cy="65" r="4" fill="#EDE8DD"/>
+          <circle cx="130" cy="65" r="4" fill="#EDE8DD"/>
+          <text x="68" y="50" font-size="11" fill="#B9B6A9" font-family="JetBrains Mono">180°</text>
+        </svg>
+      </div>
+      <div class="hib-angle">Ángulo: <b>180°</b></div>
+      <div class="hib-desc">1 orbital s + 1 orbital p → 2 orbitales lineales. Forma enlace triple (1σ + 2π).</div>
+      <div class="hib-example">Ej: alquinos</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="enlaces" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">03 · Cómo se cuentan</span>
+    <h2>Enlaces sigma (σ) y pi (π)</h2>
+  </div>
+  <p class="section-intro">Cada enlace covalente entre carbonos sigue esta regla simple, clave para la sección de identificación del examen.</p>
+
+  <div class="enlace-row sigma">
+    <div class="enlace-sym">σ</div>
+    <div>
+      <div class="enlace-title">Enlace sigma</div>
+      <div class="enlace-desc">Se forma por superposición frontal de orbitales. Todo enlace covalente tiene al menos un sigma — incluso los enlaces dobles y triples empiezan con uno.</div>
+      <span class="enlace-tag">Enlace simple = 1σ</span>
+    </div>
+  </div>
+  <div class="enlace-row pi">
+    <div class="enlace-sym">π</div>
+    <div>
+      <div class="enlace-title">Enlace pi</div>
+      <div class="enlace-desc">Se forma por superposición lateral de orbitales p. Solo aparece junto a un sigma, nunca solo. Cada enlace doble suma uno; cada enlace triple suma dos.</div>
+      <span class="enlace-tag">Doble = 1σ + 1π · Triple = 1σ + 2π</span>
+    </div>
+  </div>
+
+  <div class="count-box">
+    <h4>Conteo aplicado: molécula del examen</h4>
+    <p>CH₂=CH−CH₂−C(=O)−CH₂−C≡CH</p>
+    <div class="mol-formula">CH<sub>2</sub><span class="db">=</span>CH—CH<sub>2</sub>—C<span class="db">(=O)</span>—CH<sub>2</sub>—C<span class="tb">≡</span>CH</div>
+    <div class="count-answers">
+      <div class="ans s"><span class="v">11</span><span class="l">enlaces σ</span></div>
+      <div class="ans p"><span class="v">4</span><span class="l">enlaces π</span></div>
+    </div>
+    <p style="margin-top:14px;">Se cuentan: 1 doble C=C (1σ+1π), 1 doble C=O (1σ+1π), 1 triple C≡C (1σ+2π), y el resto de enlaces C–C y C–H, todos simples (solo σ).</p>
+  </div>
+</section>
+
+<section id="isomeria" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">03.1 · La misma fórmula, otra forma</span>
+    <h2>Geometría molecular e isomería</h2>
+  </div>
+  <p class="section-intro">La geometría depende de cuántos grupos rodean al carbono central. La isomería ocurre cuando varios compuestos comparten fórmula pero no estructura.</p>
+
+  <div class="geo-grid">
+    <div class="geo-card">
+      <div class="geo-shape">
+        <svg width="90" height="80" viewBox="0 0 90 80">
+          <line x1="45" y1="40" x2="45" y2="8" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="45" y1="40" x2="14" y2="62" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="45" y1="40" x2="76" y2="62" stroke="#8FBE6B" stroke-width="2"/>
+          <line x1="45" y1="40" x2="45" y2="74" stroke="#8FBE6B" stroke-width="2" stroke-dasharray="3 2"/>
+          <circle cx="45" cy="40" r="6" fill="#8FBE6B"/>
+        </svg>
+      </div>
+      <div class="geo-name">4 grupos</div>
+      <div class="geo-desc">Tetraédrica, 109,5°. Carbono con 4 enlaces simples.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-shape">
+        <svg width="90" height="80" viewBox="0 0 90 80">
+          <line x1="45" y1="42" x2="45" y2="12" stroke="#D9A653" stroke-width="2"/>
+          <line x1="45" y1="42" x2="18" y2="64" stroke="#D9A653" stroke-width="2"/>
+          <line x1="45" y1="42" x2="72" y2="64" stroke="#D9A653" stroke-width="2"/>
+          <circle cx="45" cy="42" r="6" fill="#D9A653"/>
+        </svg>
+      </div>
+      <div class="geo-name">3 grupos</div>
+      <div class="geo-desc">Plana trigonal, 120°. Carbono con un enlace doble.</div>
+    </div>
+    <div class="geo-card">
+      <div class="geo-shape">
+        <svg width="90" height="80" viewBox="0 0 90 80">
+          <line x1="12" y1="40" x2="78" y2="40" stroke="#6FA0C4" stroke-width="2"/>
+          <circle cx="45" cy="40" r="6" fill="#6FA0C4"/>
+        </svg>
+      </div>
+      <div class="geo-name">2 grupos</div>
+      <div class="geo-desc">Lineal, 180°. Carbono con un enlace triple.</div>
+    </div>
+  </div>
+
+  <div class="count-box">
+    <h4>Tipos de isomería</h4>
+    <p>Mismos átomos, distinta disposición — y por eso, propiedades distintas.</p>
+    <div class="iso-pair">
+      <div class="iso-card">
+        <span class="iso-label">De cadena / posición</span>
+        <div class="mol-formula" style="white-space:normal; font-size:13px;">CH₃-CH₂-CH₂-CH₃<br>vs<br>CH₃-CH(CH₃)-CH₃</div>
+      </div>
+      <div class="iso-card">
+        <span class="iso-label">Geométrica (cis-trans)</span>
+        <div class="mol-formula" style="white-space:normal; font-size:13px;">Cis: ambos H del mismo lado<br>Trans: H en lados opuestos</div>
+      </div>
+    </div>
+    <p style="margin-top:14px;">La isomería geométrica solo ocurre en dobles enlaces, porque el enlace pi impide la rotación libre alrededor del eje C=C.</p>
+  </div>
+</section>
+
+<section id="hidrocarburos" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">04 · Tema B</span>
+    <h2>Familias de hidrocarburos</h2>
+  </div>
+  <p class="section-intro">La base de los hidrocarburos alifáticos: saturados frente a insaturados, y su enlace característico.</p>
+
+  <div class="table-scroll">
+    <table class="hc-table">
+      <thead>
+        <tr><th>Familia</th><th>Tipo</th><th>Enlace C–C</th><th>Fórmula general</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Alcanos</td>
+          <td><span class="hc-pill sat">Saturado</span></td>
+          <td>Simple (σ)</td>
+          <td>C<sub>n</sub>H<sub>2n+2</sub></td>
+        </tr>
+        <tr>
+          <td>Alquenos</td>
+          <td><span class="hc-pill uns">Insaturado</span></td>
+          <td>Doble (σ + π)</td>
+          <td>C<sub>n</sub>H<sub>2n</sub></td>
+        </tr>
+        <tr>
+          <td>Alquinos</td>
+          <td><span class="hc-pill uns">Insaturado</span></td>
+          <td>Triple (σ + 2π)</td>
+          <td>C<sub>n</sub>H<sub>2n-2</sub></td>
+        </tr>
+        <tr>
+          <td>Aromáticos</td>
+          <td><span class="hc-pill uns">Insaturado cíclico</span></td>
+          <td>Anillo con enlaces deslocalizados</td>
+          <td>basados en benceno (C₆H₆)</td>
+        </tr>
+      </tbody>
     </table>
-    <p style="color:var(--muted); font-size:0.85rem">⚠️ En el examen solo entra: % m/m, % m/v, ppm y Molaridad</p>
+  </div>
+</section>
+
+<section id="funcionales" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">04.1 · Más allá del C y el H</span>
+    <h2>Grupos funcionales</h2>
+  </div>
+  <p class="section-intro">Cuando otros átomos (O, N, halógenos) se incorporan a la cadena, aparecen nuevas familias con propiedades propias.</p>
+
+  <div class="func-grid">
+    <div class="func-card">
+      <div class="func-name">Alcohol</div>
+      <span class="func-group">–OH · termina en -ol</span>
+      <div class="func-ex">Etanol: CH₃-CH₂-OH</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Aldehído</div>
+      <span class="func-group">–CHO · termina en -al</span>
+      <div class="func-ex">Etanal: CH₃-CHO</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Cetona</div>
+      <span class="func-group">C=O interno · -ona</span>
+      <div class="func-ex">Propanona: CH₃-CO-CH₃</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Ácido carboxílico</div>
+      <span class="func-group">–COOH · -oico</span>
+      <div class="func-ex">Ác. acético: CH₃-COOH</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Éster</div>
+      <span class="func-group">–COOR' · -ato de -ilo</span>
+      <div class="func-ex">Etanoato de metilo</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Éter</div>
+      <span class="func-group">R–O–R'</span>
+      <div class="func-ex">Dimetil éter: CH₃-O-CH₃</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Amina</div>
+      <span class="func-group">–NH₂ · -amina</span>
+      <div class="func-ex">Etanamina: CH₃-CH₂-NH₂</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Amida</div>
+      <span class="func-group">–CONH₂ · -amida</span>
+      <div class="func-ex">Etanoamida</div>
+    </div>
+    <div class="func-card">
+      <div class="func-name">Halogenuro</div>
+      <span class="func-group">R–X · -uro</span>
+      <div class="func-ex">Clorometano: CH₃-Cl</div>
+    </div>
   </div>
 
-  <!-- % m/m -->
-  <div class="card green">
-    <h2>⚖️ Porcentaje Masa/Masa (% m/m) <span class="tag tag-g">Físico</span></h2>
-    <p>Indica los gramos de soluto disueltos en 100 g de disolución total.</p>
-    <div class="formula">% m/m = (masa de soluto × 100) / masa total de disolución</div>
-    <div class="highlight">Masa total = masa soluto + masa disolvente</div>
-    <h3>Ejemplo del libro:</h3>
-    <p>0,864 g de KCl se disuelven en 85 g de agua:</p>
-    <div class="formula">% m/m = (0,864 × 100) / (0,864 + 85) = <strong>1,01%</strong></div>
-    <h3>¿Cómo preparar una solución % m/m?</h3>
-    <p>Ejemplo: 325 g de solución al 5% de glucosa (C₆H₁₂O₆):</p>
-    <ul class="notes">
-      <li><strong>Paso 1:</strong> Masa soluto = 5% × 325 g = 12,5 g de glucosa</li>
-      <li><strong>Paso 2:</strong> Masa agua = 325 − 12,5 = 312,5 g de agua</li>
-      <li><strong>Paso 3:</strong> Disolver 12,5 g en 312,5 g de agua</li>
-    </ul>
+  <div class="count-box">
+    <h4>Alcoholes: primario, secundario, terciario</h4>
+    <p>Se clasifican según el carbono al que está unido el grupo –OH.</p>
+    <div class="table-scroll">
+      <table class="hc-table">
+        <thead>
+          <tr><th>Tipo</th><th>Carbono unido al –OH</th><th>Ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Primario (1°)</td><td>Unido a un solo carbono</td><td>CH₃-CH₂-OH</td></tr>
+          <tr><td>Secundario (2°)</td><td>Unido a dos carbonos</td><td>2-pentanol</td></tr>
+          <tr><td>Terciario (3°)</td><td>Unido a tres carbonos</td><td>3-metil-3-pentanol</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="practica" class="wrap">
+  <div class="section-head">
+    <span class="section-tag">05 · Autoevaluación</span>
+    <h2>Practica con preguntas reales</h2>
+  </div>
+  <p class="section-intro">Haz clic en una opción para ver si es correcta. Tomadas directamente de tu examen de selección.</p>
+
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 1</span>
+    <div class="qtext">Área de la química que estudia los compuestos del carbono. Se conocen más de 24 millones de compuestos que lo contienen.</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Química Orgánica</div>
+      <div class="opt" data-idx="1">Química Inorgánica</div>
+      <div class="opt" data-idx="2">Compuestos tetravalentes</div>
+    </div>
   </div>
 
-  <!-- % m/v -->
-  <div class="card yellow">
-    <h2>⚗️ Porcentaje Masa/Volumen (% m/v) <span class="tag tag-y">Físico</span></h2>
-    <p>Indica los gramos de soluto disueltos en 100 mL de disolución.</p>
-    <div class="formula">% m/v = (masa de soluto / volumen de disolución) × 100</div>
-    <div class="warning">⚠️ NO se puede sumar soluto + solvente: las unidades son diferentes (g vs mL).</div>
-    <h3>Ejemplos del libro:</h3>
-    <p><strong>Ej. 3:</strong> 20 g NaCl en 500 mL → % m/v = (20/500) × 100 = <strong>4%</strong></p>
-    <p><strong>Ej. 4:</strong> Preparar 100 mL al 33% m/v de KCl → masa = (33 × 1000)/100 = <strong>330 g KCl</strong></p>
-    <p><strong>Ej. 5:</strong> 20 g de CuSO₄ al 5% → volumen = (20 × 100)/5 = <strong>400 mL</strong></p>
+  <div class="quiz-card" data-correct="2">
+    <span class="qn">Pregunta 2</span>
+    <div class="qtext">El carbono se ubica en el grupo IV A, periodo 2, con electronegatividad intermedia de 2,5 (escala de Pauling). ¿A qué hace referencia?</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Alotropismo</div>
+      <div class="opt" data-idx="1">Hibridación</div>
+      <div class="opt" data-idx="2">Electronegatividad</div>
+    </div>
   </div>
 
-  <!-- % v/v -->
-  <div class="card red">
-    <h2>🧪 Porcentaje Volumen/Volumen (% v/v) <span class="tag tag-r">Físico</span></h2>
-    <p>Volumen de soluto (mL) disuelto en 100 mL de disolución. Solo aplica si el soluto es <strong>líquido o gaseoso</strong>.</p>
-    <div class="formula">% v/v = (volumen de soluto / volumen de disolución) × 100</div>
-    <div class="warning">⚠️ Los volúmenes NO son aditivos: al mezclar se crean fuerzas de atracción y el volumen final puede ser mayor o menor que la suma.</div>
-    <p>Ejemplo: 25% v/v de alcohol etílico = 25 mL de alcohol en 100 mL de disolución.</p>
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 4</span>
+    <div class="qtext">La combinación de un orbital s y tres orbitales p da cuatro orbitales orientados hacia los vértices de un tetraedro.</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Hibridación SP3</div>
+      <div class="opt" data-idx="1">Hibridación SP2</div>
+      <div class="opt" data-idx="2">Hibridación SP</div>
+    </div>
   </div>
 
-  <!-- ppm -->
-  <div class="card purple">
-    <h2>🔬 Partes por Millón (ppm) <span class="tag tag-p">Físico</span></h2>
-    <p>Cantidad de soluto en una parte sobre un millón. Se usa para concentraciones muy pequeñas (contaminantes, flúor en agua, medicamentos).</p>
-    <div class="formula">ppm = mg de soluto / kg de solución &nbsp;&nbsp;(sólidos)</div>
-    <div class="formula">ppm = mg de soluto / L de solución &nbsp;&nbsp;(líquidos)</div>
-    <h3>Ejemplo del libro:</h3>
-    <p>500 mL de agua con 4 mg de fluoruro:</p>
-    <ul class="notes">
-      <li>Paso 1: 500 mL = 0,500 L</li>
-      <li>Paso 2: ppm = 4 mg / 0,500 L = <strong>8 ppm</strong></li>
-    </ul>
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 6</span>
+    <div class="qtext">Al combinarse un orbital s y un orbital p producen orbitales que entre sí forman un ángulo de 180°.</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Hibridación SP</div>
+      <div class="opt" data-idx="1">Hibridación SP2</div>
+      <div class="opt" data-idx="2">Geometría molecular</div>
+    </div>
   </div>
 
-  <!-- Molaridad -->
-  <div class="card blue">
-    <h2>🧬 Molaridad (M o Cn) <span class="tag tag-b">Química</span></h2>
-    <p>Número de <strong>moles de soluto</strong> en 1 litro de disolución. Depende de la temperatura.</p>
-    <div class="formula">Cn = moles de soluto / Volumen de disolución (L)</div>
-    <div class="formula">Cn = (moles de soluto / Volumen en mL) × 1000</div>
-    <h3>Pasos para calcular moles:</h3>
-    <div class="highlight">Moles = masa de soluto / Masa Molar del soluto</div>
-    <p>Ejemplo: MM NaCl = 23 + 35,5 = <strong>58,5 g/mol</strong> → 1 mol NaCl = 58,5 g</p>
-    <p>Para 1 M de NaCl: disolver 58,5 g en suficiente agua hasta obtener 1 L.</p>
-    <div class="warning">⚠️ NO es posible sumar moles + litros. El volumen se mide después de disolver, no antes.</div>
-    <h3>Ejemplo del libro (Cn = 4,4 M):</h3>
-    <ul class="notes">
-      <li>0,17 moles disueltos en 38,67 mL</li>
-      <li>Cn = (0,17 / 38,67) × 1000 = <strong>4,4 M</strong></li>
-    </ul>
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 8</span>
+    <div class="qtext">Compuestos con la misma fórmula molecular pero distinta estructura.</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Isomería</div>
+      <div class="opt" data-idx="1">Fórmula molecular</div>
+      <div class="opt" data-idx="2">Tensión superficial</div>
+    </div>
+  </div>
+
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 10</span>
+    <div class="qtext">Los átomos de carbono que conforman el diamante presentan la hibridación:</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">SP3</div>
+      <div class="opt" data-idx="1">SP</div>
+      <div class="opt" data-idx="2">SP2</div>
+    </div>
+  </div>
+
+  <div class="quiz-card" data-correct="0">
+    <span class="qn">Pregunta 11</span>
+    <div class="qtext">Para convertir grafito en diamante se requieren presiones de más de 10 millones de kPa y ~2000 °C. ¿Qué propiedad describe esto?</div>
+    <div class="opt-list">
+      <div class="opt" data-idx="0">Alotropía</div>
+      <div class="opt" data-idx="1">Tetravalencia</div>
+      <div class="opt" data-idx="2">Hibridación</div>
+    </div>
   </div>
 
 </section>
 
-<!-- ===================== FÓRMULAS ===================== -->
-<section id="formulas" class="section">
-  <div class="card blue">
-    <h2>📐 Tabla Resumen de Fórmulas</h2>
-    <table>
-      <tr>
-        <th>Unidad</th>
-        <th>Fórmula</th>
-        <th>Unidades</th>
-      </tr>
-      <tr>
-        <td><strong>% m/m</strong></td>
-        <td>(masa soluto × 100) / masa total</td>
-        <td>g soluto / 100 g solución</td>
-      </tr>
-      <tr>
-        <td><strong>% m/v</strong></td>
-        <td>(masa soluto / vol. solución) × 100</td>
-        <td>g soluto / 100 mL solución</td>
-      </tr>
-      <tr>
-        <td><strong>% v/v</strong></td>
-        <td>(vol. soluto / vol. solución) × 100</td>
-        <td>mL soluto / 100 mL solución</td>
-      </tr>
-      <tr>
-        <td><strong>ppm</strong></td>
-        <td>mg soluto / L solución</td>
-        <td>mg/L o mg/kg</td>
-      </tr>
-      <tr>
-        <td><strong>Molaridad</strong></td>
-        <td>moles soluto / L solución</td>
-        <td>mol/L (M)</td>
-      </tr>
-    </table>
+<section class="wrap">
+  <div class="section-head">
+    <span class="section-tag">06 · Respuesta restringida</span>
+    <h2>Las tres preguntas de desarrollo</h2>
+  </div>
+  <p class="section-intro">Respuestas modelo, concretas y ordenadas, para los 12 puntos finales del examen.</p>
+
+  <div class="rr-card">
+    <span class="rr-num">1</span>
+    <div class="rr-q">Principal característica de un compuesto orgánico, con un ejemplo. (3 pts)</div>
+    <div class="rr-a"><strong>Característica:</strong> todo compuesto orgánico contiene carbono, generalmente unido a hidrógeno, y este carbono forma enlaces covalentes estables consigo mismo y con otros elementos. <strong>Ejemplo:</strong> el metano (CH₄).</div>
   </div>
 
-  <div class="card green">
-    <h2>🔑 Fórmulas relacionadas</h2>
-    <h3>Masa total de disolución:</h3>
-    <div class="formula">Masa total = masa soluto + masa disolvente</div>
-    <h3>Moles de soluto:</h3>
-    <div class="formula">Moles = masa (g) / Masa Molar (g/mol)</div>
-    <h3>Conversión de volumen:</h3>
-    <div class="formula">1 L = 1000 mL &nbsp;&nbsp;|&nbsp;&nbsp; 500 mL = 0,500 L</div>
-    <h3>Tabla de masas molares útiles:</h3>
-    <table>
-      <tr><th>Compuesto</th><th>Masa Molar</th></tr>
-      <tr><td>NaCl</td><td>58,5 g/mol (Na=23, Cl=35,5)</td></tr>
-      <tr><td>KCl</td><td>74,5 g/mol (K=39, Cl=35,5)</td></tr>
-      <tr><td>C₆H₁₂O₆ (glucosa)</td><td>180 g/mol</td></tr>
-      <tr><td>AgNO₃</td><td>170 g/mol (Ag=108, N=14, O×3=48)</td></tr>
-      <tr><td>H₂O</td><td>18 g/mol</td></tr>
-    </table>
+  <div class="rr-card">
+    <span class="rr-num">2</span>
+    <div class="rr-q">Qué es un compuesto saturado y uno insaturado, y el enlace de cada uno. (6 pts)</div>
+    <div class="rr-a">
+      <strong>Saturado:</strong> sus átomos de carbono están unidos únicamente por enlaces simples (sigma, σ). No tiene dobles ni triples enlaces. Ej: los alcanos.<br><br>
+      <strong>Insaturado:</strong> tiene al menos un enlace doble o triple entre carbonos (combinación de sigma y pi, σ+π). Ej: los alquenos y alquinos.
+    </div>
   </div>
 
-  <div class="card yellow">
-    <h2>⚠️ Puntos críticos para el examen</h2>
-    <ul class="notes">
-      <li><strong>% m/m:</strong> se puede sumar soluto + disolvente porque ambos están en gramos.</li>
-      <li><strong>% m/v y Molaridad:</strong> NO se puede sumar soluto + disolvente (unidades distintas).</li>
-      <li><strong>% v/v:</strong> solo para solutos líquidos o gaseosos. Los volúmenes NO son aditivos.</li>
-      <li><strong>ppm:</strong> convertir siempre el volumen a litros antes de calcular.</li>
-      <li><strong>Molaridad:</strong> calcular la Masa Molar sumando masas atómicas de la tabla periódica.</li>
-      <li>La concentración es una <strong>propiedad intensiva</strong> (no depende del volumen).</li>
-    </ul>
+  <div class="rr-card">
+    <span class="rr-num">3</span>
+    <div class="rr-q">Una propiedad general de alcanos, alquenos y alquinos. (3 pts)</div>
+    <div class="rr-a">Los tres son hidrocarburos, es decir, compuestos formados únicamente por carbono e hidrógeno; son poco solubles en agua pero solubles en disolventes orgánicos, y son combustibles (liberan energía al reaccionar con oxígeno).</div>
   </div>
 </section>
 
-<!-- ===================== AGUAS ===================== -->
-<section id="aguas" class="section">
-  <div class="card blue">
-    <h2>💧 Tratamiento de Aguas Residuales</h2>
-    <p>Las aguas residuales provienen de ciudades, industrias y hogares. Se tratan en las <strong>EDAR (Estaciones de Depuración de Aguas Residuales)</strong>.</p>
-    <h3>Etapas del tratamiento:</h3>
-    <table>
-      <tr><th>Etapa</th><th>Descripción</th></tr>
-      <tr><td><strong>Pretratamiento</strong></td><td>Eliminación de sólidos grandes: arenas y aceites</td></tr>
-      <tr><td><strong>Tratamiento Primario</strong></td><td>Procesos físico-químicos para reducir partículas en suspensión</td></tr>
-      <tr><td><strong>Tratamiento Secundario</strong></td><td>Procesos biológicos para eliminar materia orgánica (eficacia 90%)</td></tr>
-      <tr><td><strong>Tratamiento Terciario</strong></td><td>Elimina agentes patógenos y nutrientes. Opcional.</td></tr>
-    </table>
-  </div>
-
-  <div class="card green">
-    <h2>🔩 Métodos del Tratamiento Primario</h2>
-    <table>
-      <tr><th>Método</th><th>Descripción</th></tr>
-      <tr><td><strong>Sedimentación</strong></td><td>Partículas caen por gravedad (elimina hasta 40% de sólidos). Se hace en tanques decantadores.</td></tr>
-      <tr><td><strong>Flotación</strong></td><td>Retira espumas, grasas y aceites. Puede eliminar hasta 75% de partículas suspendidas.</td></tr>
-      <tr><td><strong>Neutralización</strong></td><td>Ajusta el pH a 6–8,5. Aguas ácidas: se añaden sustancias alcalinas; aguas alcalinas: se añade CO₂.</td></tr>
-    </table>
-  </div>
-
-  <div class="card yellow">
-    <h2>🦠 Métodos del Tratamiento Secundario</h2>
-    <p><strong>Aerobios</strong> (con oxígeno): degradan materia orgánica → agua, CO₂, eliminan compuestos nitrogenados.</p>
-    <p><strong>Anaerobios</strong> (sin oxígeno): reacciones fermentativas → energía, metano, CO₂.</p>
-    <table>
-      <tr><th>Método</th><th>Tipo</th></tr>
-      <tr><td>Lodos activos</td><td>Aerobio</td></tr>
-      <tr><td>Lechos bacterianos</td><td>Aerobio</td></tr>
-      <tr><td>Filtros verdes</td><td>Aerobio</td></tr>
-      <tr><td>Digestión anaeróbica</td><td>Anaerobio</td></tr>
-    </table>
-  </div>
-
-  <div class="card red">
-    <h2>🛡️ Métodos del Tratamiento Terciario</h2>
-    <table>
-      <tr><th>Método</th><th>Descripción</th></tr>
-      <tr><td><strong>Radiación UV</strong></td><td>Elimina ~99% de microorganismos. El agua debe estar muy clara.</td></tr>
-      <tr><td><strong>Intercambio iónico</strong></td><td>Retira sales en bajas concentraciones usando resinas.</td></tr>
-      <tr><td><strong>Ósmosis inversa</strong></td><td>Elimina sales pasando agua de solución concentrada a diluida.</td></tr>
-      <tr><td><strong>Filtración</strong></td><td>Elimina partículas orgánicas restantes con arenas y gravas.</td></tr>
-      <tr><td><strong>Cloración</strong></td><td>Elimina microorganismos y contribuye a eliminar amonio.</td></tr>
-    </table>
-  </div>
-
-  <div class="card purple">
-    <h2>📊 Valores Máximos en Agua Potable (Costa Rica)</h2>
-    <p>Según el Reglamento para la Calidad del Agua Potable (Decreto 38924-S):</p>
-    <table>
-      <tr><th>Parámetro</th><th>VMA (mg/L)</th></tr>
-      <tr><td>Fluoruro</td><td>0,7 – 1,5</td></tr>
-      <tr><td>Nitrato</td><td>50</td></tr>
-      <tr><td>Mercurio</td><td>0,001</td></tr>
-      <tr><td>Plomo</td><td>0,01</td></tr>
-      <tr><td>Arsénico</td><td>0,01</td></tr>
-      <tr><td>Cobre</td><td>2,0</td></tr>
-      <tr><td>Aluminio</td><td>0,2</td></tr>
-    </table>
-    <div class="highlight">Los valores se expresan en mg/L, que equivale a ppm en soluciones acuosas diluidas.</div>
-  </div>
-</section>
-
-<!-- ===================== PRÁCTICA ===================== -->
-<section id="practica" class="section">
-  <div style="margin-bottom:24px">
-    <p style="color:var(--muted); font-size:0.9rem">Selecciona la respuesta correcta en cada pregunta. Recibirás retroalimentación inmediata.</p>
-  </div>
-
-  <div id="questions-container"></div>
-
-  <div style="text-align:center; margin-top:10px">
-    <button class="btn-primary" onclick="checkAll()">Ver resultados finales</button>
-    <br>
-    <button class="btn-reset" onclick="resetQuiz()">🔄 Reiniciar práctica</button>
-  </div>
-
-  <div id="score-panel">
-    <div id="score-num"></div>
-    <div id="score-msg"></div>
-    <div id="score-detail" style="margin-top:16px; color:var(--muted); font-size:0.88rem"></div>
-  </div>
-</section>
+<footer class="wrap">
+  <div class="dot-row">● ● ●</div>
+  Guía de repaso — Química 12° · Examen II semestre
+</footer>
 
 <script>
-const questions = [
-  {
-    q: "¿Qué indica una solución al 10% m/m de NaCl?",
-    opts: [
-      "10 g de NaCl disueltos en 100 mL de solución",
-      "10 g de NaCl disueltos en 100 g de solución total",
-      "10 mL de NaCl en 100 g de agua",
-      "10 mol de NaCl en 1 L de solución"
-    ],
-    correct: 1,
-    exp: "% m/m indica gramos de soluto por cada 100 g de solución total (soluto + disolvente)."
-  },
-  {
-    q: "Se disuelven 0,864 g de KCl en 85 g de agua. ¿Cuál es el % m/m?",
-    opts: ["1,00%", "1,01%", "0,86%", "10,1%"],
-    correct: 1,
-    exp: "% m/m = (0,864 × 100) / (0,864 + 85) = 86,4 / 85,864 ≈ 1,01%"
-  },
-  {
-    q: "Para preparar 325 g de solución al 5% m/m de glucosa, ¿cuánta agua se necesita?",
-    opts: ["312,5 g", "16,25 g", "308,75 g", "300 g"],
-    correct: 2,
-    exp: "Masa soluto = (5 × 325) / 100 = 16,25 g de glucosa. Agua = 325 − 16,25 = 308,75 g."
-  },
-  {
-    q: "¿Cuál es la diferencia principal entre % m/m y % m/v?",
-    opts: [
-      "% m/m usa litros y % m/v usa kilogramos",
-      "% m/m usa gramos de solución, % m/v usa mililitros de solución",
-      "Son exactamente iguales",
-      "% m/v siempre da un valor mayor"
-    ],
-    correct: 1,
-    exp: "% m/m: g soluto / g solución. % m/v: g soluto / mL solución. Las unidades del denominador son distintas."
-  },
-  {
-    q: "20 g de NaCl se disuelven en 500 mL de solución. ¿Cuál es el % m/v?",
-    opts: ["0,04%", "4%", "40%", "2,5%"],
-    correct: 1,
-    exp: "% m/v = (20 g / 500 mL) × 100 = 4%"
-  },
-  {
-    q: "¿Para qué tipo de solutos es válido el % v/v?",
-    opts: [
-      "Solo para sólidos",
-      "Para cualquier tipo de soluto",
-      "Solo para solutos líquidos o gaseosos",
-      "Solo para solutos iónicos"
-    ],
-    correct: 2,
-    exp: "El % v/v mide volúmenes, por lo que solo tiene sentido si el soluto es líquido o gaseoso."
-  },
-  {
-    q: "Una muestra de agua de 500 mL contiene 4 mg de fluoruro. ¿Cuántos ppm hay?",
-    opts: ["2 ppm", "4 ppm", "8 ppm", "0,8 ppm"],
-    correct: 2,
-    exp: "500 mL = 0,500 L. ppm = 4 mg / 0,500 L = 8 ppm"
-  },
-  {
-    q: "¿Cuál es la unidad de las ppm para soluciones líquidas?",
-    opts: ["g/L", "mol/L", "mg/L", "mg/kg"],
-    correct: 2,
-    exp: "Para soluciones líquidas: ppm = mg de soluto / L de solución (mg/L). Para sólidos: mg/kg."
-  },
-  {
-    q: "¿Qué significa una solución 1 M de NaCl?",
-    opts: [
-      "1 g de NaCl en 1 litro de agua",
-      "1 mol de NaCl disuelto en suficiente agua para obtener 1 litro de solución",
-      "1 mol de NaCl + 1 L de agua",
-      "58,5 mL de NaCl en 1 L"
-    ],
-    correct: 1,
-    exp: "1 M significa 1 mol de soluto por litro de SOLUCIÓN (no de agua). El volumen se mide al final."
-  },
-  {
-    q: "La Masa Molar del NaCl es 58,5 g/mol. ¿Cuántos gramos se necesitan para 1 L de solución 1 M?",
-    opts: ["23 g", "35,5 g", "58,5 g", "117 g"],
-    correct: 2,
-    exp: "1 mol de NaCl = 58,5 g (23 g de Na + 35,5 g de Cl). Para 1 M en 1 L: 58,5 g."
-  },
-  {
-    q: "Se tienen 0,17 moles en 38,67 mL de solución. ¿Cuál es la molaridad?",
-    opts: ["0,44 M", "4,4 M", "44 M", "0,044 M"],
-    correct: 1,
-    exp: "Cn = (0,17 / 38,67) × 1000 = 4,4 M"
-  },
-  {
-    q: "¿Por qué NO se puede aplicar 'soluto + solvente = solución' en la Molaridad?",
-    opts: [
-      "Porque la fórmula es incorrecta",
-      "Porque las unidades son diferentes: soluto en moles y solvente en litros",
-      "Porque el soluto no tiene masa",
-      "Porque solo aplica para el % m/m"
-    ],
-    correct: 1,
-    exp: "En molaridad, el soluto se mide en moles y el solvente en litros: son variables distintas que no se pueden sumar."
-  },
-  {
-    q: "¿Cuál es el propósito del tratamiento primario de aguas residuales?",
-    opts: [
-      "Eliminar microorganismos patógenos",
-      "Reducir partículas en suspensión mediante procesos físico-químicos",
-      "Eliminar materia orgánica mediante bacterias",
-      "Ajustar el pH del agua"
-    ],
-    correct: 1,
-    exp: "El tratamiento primario usa procesos físico-químicos (sedimentación, flotación, neutralización) para reducir partículas en suspensión."
-  },
-  {
-    q: "¿Qué proceso del tratamiento terciario elimina aproximadamente el 99% de los microorganismos?",
-    opts: ["Cloración", "Ósmosis inversa", "Radiación ultravioleta", "Filtración"],
-    correct: 2,
-    exp: "La radiación UV impide la reproducción de microorganismos y su capacidad de infección, eliminando ~99%."
-  },
-  {
-    q: "Según las normas de Costa Rica, ¿cuál es el valor máximo admisible de fluoruro en agua potable?",
-    opts: ["0,01 mg/L", "50 mg/L", "0,7 a 1,5 mg/L", "2,0 mg/L"],
-    correct: 2,
-    exp: "El VMA de fluoruro es 0,7 a 1,5 mg/L según el Reglamento para la Calidad del Agua Potable (Decreto 38924-S)."
-  },
-  {
-    q: "¿Cuál de las siguientes afirmaciones sobre la concentración es CORRECTA?",
-    opts: [
-      "Es una propiedad extensiva que depende del volumen",
-      "Es una propiedad intensiva: no depende del volumen total de la solución",
-      "Siempre se expresa en mol/L",
-      "Solo puede medirse con unidades físicas"
-    ],
-    correct: 1,
-    exp: "La concentración es una propiedad intensiva: si se toma la mitad de una solución, la concentración sigue siendo la misma."
-  }
-];
-
-function buildQuiz() {
-  const container = document.getElementById('questions-container');
-  container.innerHTML = '';
-  questions.forEach((q, i) => {
-    const block = document.createElement('div');
-    block.className = 'question-block';
-    block.id = 'q' + i;
-    block.innerHTML = `
-      <div class="question-num">Pregunta ${i + 1} de ${questions.length}</div>
-      <div class="question-text">${q.q}</div>
-      <div class="options">
-        ${q.opts.map((o, j) => `
-          <button class="option" data-q="${i}" data-o="${j}" onclick="selectOption(${i}, ${j})">${o}</button>
-        `).join('')}
-      </div>
-      <div class="feedback" id="fb${i}"></div>
-    `;
-    container.appendChild(block);
+  document.querySelectorAll('.navlinks a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   });
-  document.getElementById('score-panel').classList.remove('show');
-}
 
-function selectOption(qIndex, oIndex) {
-  const block = document.getElementById('q' + qIndex);
-  const buttons = block.querySelectorAll('.option');
-  if (buttons[0].disabled) return;
-  
-  const q = questions[qIndex];
-  buttons.forEach(b => b.disabled = true);
-  
-  const fb = document.getElementById('fb' + qIndex);
-  
-  if (oIndex === q.correct) {
-    buttons[oIndex].classList.add('selected-correct');
-    block.classList.add('correct');
-    fb.className = 'feedback show ok';
-    fb.textContent = '✅ ¡Correcto! ' + q.exp;
-  } else {
-    buttons[oIndex].classList.add('selected-wrong');
-    buttons[q.correct].classList.add('show-correct');
-    block.classList.add('wrong');
-    fb.className = 'feedback show no';
-    fb.textContent = '❌ Incorrecto. ' + q.exp;
-  }
-}
-
-function checkAll() {
-  let correct = 0;
-  let answered = 0;
-  questions.forEach((q, i) => {
-    const block = document.getElementById('q' + i);
-    if (block.classList.contains('correct')) { correct++; answered++; }
-    else if (block.classList.contains('wrong')) answered++;
+  document.querySelectorAll('.quiz-card').forEach(card => {
+    const correctIdx = card.dataset.correct;
+    const opts = card.querySelectorAll('.opt');
+    let answered = false;
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        if(answered) return;
+        answered = true;
+        opts.forEach(o => {
+          if(o.dataset.idx === correctIdx){ o.classList.add('correct'); }
+          else if(o === opt){ o.classList.add('wrong'); }
+        });
+      });
+    });
   });
-  
-  const panel = document.getElementById('score-panel');
-  const pct = answered > 0 ? Math.round((correct / questions.length) * 100) : 0;
-  document.getElementById('score-num').textContent = correct + '/' + questions.length;
-  
-  let msg, detail;
-  if (pct >= 90) { msg = '🏆 ¡Excelente! Estás muy preparado/a.'; }
-  else if (pct >= 70) { msg = '👍 Muy bien. Repasa los temas donde fallaste.'; }
-  else if (pct >= 50) { msg = '📚 Bien, pero necesitas repasar más.'; }
-  else { msg = '💪 Sigue estudiando. Vuelve al resumen y practica de nuevo.'; }
-  
-  detail = `Respondiste ${answered} de ${questions.length} preguntas · ${pct}% de acierto`;
-  
-  document.getElementById('score-msg').textContent = msg;
-  document.getElementById('score-detail').textContent = detail;
-  panel.classList.add('show');
-  panel.scrollIntoView({ behavior: 'smooth' });
-}
-
-function resetQuiz() {
-  buildQuiz();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function showTab(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById(name).classList.add('active');
-  const tabs = ['resumen','formulas','aguas','practica'];
-  document.querySelectorAll('nav button')[tabs.indexOf(name)].classList.add('active');
-}
-
-buildQuiz();
 </script>
+
 </body>
 </html>
