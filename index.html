@@ -328,6 +328,14 @@
   .opt.wrong{ border-color: var(--red); color: var(--ink); }
   .reveal-hint{ font-size:12px; color: var(--ink-dim); margin-top:10px; font-family: var(--mono); opacity:0.7; }
 
+  .quiz-explain{
+    margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);
+    font-size:13.5px; color: var(--ink-dim); line-height:1.55;
+    display:none;
+  }
+  .quiz-explain.show{ display:block; }
+  .quiz-explain strong{ color: var(--green); }
+
   /* ---------- respuesta restringida ---------- */
   .rr-card{
     background: var(--panel); border:1px solid var(--line); border-radius:10px;
@@ -852,6 +860,7 @@
       <div class="opt" data-idx="1">b) Química Inorgánica</div>
       <div class="opt" data-idx="2">c) Compuestos tetravalentes</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> esta es la definición exacta de química orgánica que abre el examen — el área que estudia los compuestos del carbono, de los cuales hoy se conocen más de 24 millones.</div>
   </div>
 
   <div class="quiz-card" data-correct="2">
@@ -862,6 +871,7 @@
       <div class="opt" data-idx="1">Hibridación</div>
       <div class="opt" data-idx="2">Electronegatividad</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> la electronegatividad mide qué tanto atrae un átomo a los electrones de un enlace. El valor intermedio del carbono (2,5) es justamente lo que le permite combinarse tanto con átomos más electronegativos (O, N) como con menos electronegativos (H, metales) — su anfoterismo.</div>
   </div>
 
   <div class="quiz-card" data-correct="1">
@@ -872,6 +882,7 @@
       <div class="opt" data-idx="1">Hibridación de orbitales</div>
       <div class="opt" data-idx="2">Carbono</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> la hibridación es la mezcla de orbitales atómicos (s y p) en nuevos orbitales equivalentes. Es lo que explica por qué el carbono forma ángulos de 109,5° (SP3), 120° (SP2) o 180° (SP) y por qué cada uno de sus enlaces tiene la misma fuerza.</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -882,6 +893,7 @@
       <div class="opt" data-idx="1">b) Hibridación SP2</div>
       <div class="opt" data-idx="2">c) Hibridación SP</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> 1 orbital s + 3 orbitales p siempre da 4 orbitales híbridos sp3, orientados hacia los vértices de un tetraedro (109,5°). Es la hibridación del metano y del diamante.</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -892,6 +904,7 @@
       <div class="opt" data-idx="1">B) Homocombinación</div>
       <div class="opt" data-idx="2">C) Coplanaridad</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> la geometría molecular describe la forma tridimensional que toma el carbono según el número de grupos que lo rodean: 4 grupos → tetraédrica, 3 grupos → plana trigonal, 2 grupos → lineal.</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -902,6 +915,7 @@
       <div class="opt" data-idx="1">B) Hibridación SP2</div>
       <div class="opt" data-idx="2">C) Geometría molecular</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> 1 orbital s + 1 orbital p da 2 orbitales híbridos sp, lineales, a 180° entre sí. Esta hibridación es la que permite el enlace triple del acetileno (HC≡CH).</div>
   </div>
 
   <div class="quiz-card" data-correct="1">
@@ -912,6 +926,7 @@
       <div class="opt" data-idx="1">B) Fórmula empírica</div>
       <div class="opt" data-idx="2">C) Estructural</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> la fórmula empírica solo da la proporción mínima entre los átomos (ej. CH₂O), sin indicar la cantidad real ni cómo están unidos. La fórmula molecular sí da el número exacto de átomos; la estructural muestra además los enlaces.</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -922,6 +937,7 @@
       <div class="opt" data-idx="1">b) Fórmula Molecular</div>
       <div class="opt" data-idx="2">c) Tensión superficial</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> los isómeros comparten la misma fórmula (mismos átomos, en igual cantidad) pero los átomos están unidos de forma distinta, lo que les da propiedades físicas y químicas diferentes.</div>
   </div>
 
   <div class="quiz-card" data-correct="1">
@@ -932,6 +948,7 @@
       <div class="opt" data-idx="1">b) Tetravalencia</div>
       <div class="opt" data-idx="2">c) Anfoterismo</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> el anfoterismo es justo esa capacidad de combinarse con átomos más o menos electronegativos que él (no confundir con tetravalencia, que se refiere al número de enlaces, no a con quién se combina).</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -942,6 +959,7 @@
       <div class="opt" data-idx="1">b) Sp</div>
       <div class="opt" data-idx="2">c) Sp2</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> en el diamante, cada carbono está unido a otros cuatro mediante enlaces simples en una red tetraédrica — la firma de la hibridación SP3. Por eso es tan duro: toda la estructura está unida solo por enlaces sigma fuertes.</div>
   </div>
 
   <div class="quiz-card" data-correct="0">
@@ -952,6 +970,7 @@
       <div class="opt" data-idx="1">b) Tetravalencia</div>
       <div class="opt" data-idx="2">c) Hibridación</div>
     </div>
+    <div class="quiz-explain"><strong>Por qué:</strong> la alotropía es la capacidad de un elemento de existir en distintas estructuras moleculares. El diamante (SP3) y el grafito (SP2) son la misma sustancia —solo carbono— pero ordenado de forma diferente, lo que les da propiedades opuestas.</div>
   </div>
 
 </section>
@@ -1005,6 +1024,7 @@
   document.querySelectorAll('.quiz-card').forEach(card => {
     const correctIdx = card.dataset.correct;
     const opts = card.querySelectorAll('.opt');
+    const explain = card.querySelector('.quiz-explain');
     let answered = false;
     opts.forEach(opt => {
       opt.addEventListener('click', () => {
@@ -1014,6 +1034,7 @@
           if(o.dataset.idx === correctIdx){ o.classList.add('correct'); }
           else if(o === opt){ o.classList.add('wrong'); }
         });
+        if(explain){ explain.classList.add('show'); }
       });
     });
   });
